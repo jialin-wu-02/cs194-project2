@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<title> CS194 PROJECT ONE </title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+* {
+    font-family: 'Oxygen Mono', monospace;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+p, h3, h4, h5 {
+    margin: 0px;
+    line-height: 1.9;
+    padding: 8px 0px;
+}
+
+.link {
+    text-decoration: none;
+    padding: 1px 8px;
+    border-radius: 5px;
+    background-color: rgba(204, 204, 204, 0.591);
+    transition: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.link:hover {
+    text-decoration: none;
+    border-radius: 5px;
+    background-color: rgba(113, 99, 238, 0.591);
+}
+
+.main_container {
+    margin: auto;
+    width: 1000px;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 5px;
+}
+
+.row__text {
+  margin-top: 60px;
+}
+
+.text-box {
+  width: 600px;
+}
+
+pre {
+  background-color: #eee;
+  padding: 10px 20px 0px 20px;
+}
+
+</style>
+
+<link rel="stylesheet" href="/styles/default.css">
+<script src="/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
+
+<body>
+  <div class="main_container">
+    <h1> CS194 PROJECT Two - Alex Wu </h1>
+    <div class="row__text">
+      <h2> Part One </h2>
+      <p> <b> Gradient magnitude computation </b> is essentially a way to compute gradient, or the changes in magnitude between pixels within an image.
+      To compute gradient for an image, we first compute its x-derivatives and y-derivatives. After we get the derivatives for both directions, 
+      we combine them together to the magnitude for gradient for each pixel.
+      </p>
+      <p> The gradient magnitude is also a naive edge detection method
+      if you binarize the output gradient magnitude array.
+      </div>
+      <div class="row">
+        <p> Process of calculating gradient magnitude: </p>
+        <img height="150px"src="static/man.png"> </img>
+        <img height="150px"src="static/manx.png"> </img>
+        <img height="150px"src="static/many.png"> </img>
+        <img height="150px"src="static/mangradient.png"> </img>
+      </div>
+  <div>
+  <div class="row__text">
+  <p>
+    After applying the <b> Gaussian filter</b>, the gradient image returns a much better and clearer version of the 
+    edges of the graph. The edge now is much clearer than before, and there is less noise presented in the image.
+    The reason for this improvement is that Gaussiann filter averages out the noise, and thus making the gradient 
+    stands out more.
+  </p>
+  <div>
+  <div class="row">
+  <img height="200px"src="static/man.png"> </img>
+   <img height="200px"src="static/manbetterx.png"> </img>
+    <img height="200px"src="static/manbettery.png"> </img>
+  <img height="200px"src="static/manbetter.png"> </img>
+  </div>
+    <h3> Straighten Images </h3>
+    <div class="row">
+      <p> original histogram </p>
+      <p>   original image </p>
+      <p>   straightened histogram </p>
+      <p> straightened image </p>
+    </div>
+    <div class="row">
+      <img height="170px" src="static/facade_hist_original.png"> </img>
+      <img height="170px"src="static/facade.jpg"> </img>
+      <img height="170px"src="static/facade_hist.png"> </img>
+      <img height="170px"src="static/facade_straighten.jpg"> </img>
+    </div>
+    <div class="row">
+      <img height="170px" src="static/door_hist_original.png"> </img>
+      <img height="170px"src="static/door.png"> </img>
+      <img height="170px"src="static/door_hist.png"> </img>
+      <img height="170px"src="static/door_straighten.jpg"> </img>
+    </div>
+    <div class="row">
+      <img height="170px"src="static/window_hist_original.png"> </img>
+      <img height="170px"src="static/window.png"> </img>
+      <img height="170px"src="static/window_hist.png"> </img>
+      <img height="170px"src="static/window_straighten.jpg"> </img>
+    </div>
+    <div class="row">
+      <img height="170px"src="static/building_hist_original.png"> </img>
+      <img height="170px"src="static/building.jpg"> </img>
+      <img height="170px"src="static/building_hist.png"> </img>
+      <img height="170px"src="static/building_straighten.jpg"> </img>
+    </div>
+    <p> We can see that the image of the buildings has not been straightened properly. I find that 
+    the reason behind this is due to the "edges" along the center building. Those edges are not perpendicular 
+    with the horizon, however, they occupy a large space and are very long, thus influencing our algorithm.
+    </p>
+  <h2> Part Two </h2>
+  <h3> Sharpened Images: </h3>
+    <div class="row">
+    <p> This is the result for the given image. The sharpened image  </p>
+      <img height="250px"src="static/taj.png"> </img>
+      <img height="250px"src="static/tagbetter.png"> </img>
+    </div>
+    <div class="row">
+    <p> Other interesting image:  </p>
+      <img height="250px"src="static/rem_blur.png"> </img>
+      <img height="250px"src="static/rem_sharp.png"> </img>
+    </div>
+    <div class="row">
+      <img height="200px"src="static/biden.jpg"> </img>
+      <img height="250px"src="static/biden_gau.png"> </img>
+      <img height="250px"src="static/biden_sharp.png"> </img>
+    </div>
+    <p> I download the image of Biden from the internet and apply a gaussian filter to it (the middle image). Then, I sharpen the image. As we can see, the sharpened image is not as clear and good as the original image. However, it does take away 
+    some blurring effects.
+    </p>
+    <h3> Hybrid Images: </h3>
+    <div class="row">
+      <img height="400px"src="static/trump_monkey/trump.jpg"> </img>
+      <img height="400px"src="static/trump_monkey/monkey.jpg"> </img>
+      <img height="400px"src="static/trump_monkey/hybrid.jpg"> </img>
+    </div>
+    <p> The input iamges is the president & a monkey. The output is the hybrid. </p>
+     <div class="row">
+      <img height="300px"src="static/trump_monkey/trump.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im1_input.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im1_low.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im1_low_ft.jpg"> [</img>
+      </div>
+      <p> The fourier analysis of the first input image, and the fourier analysis after applying the 
+      gaussian filter. </p>
+    <div class="row">
+      <img height="300px"src="static/trump_monkey/monkey.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im2_input.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im2_high.jpg"> </img>
+      <img height="300px"src="static/trump_monkey/im2_high_ft.jpg"> [</img>
+      </div>
+      <p> The fourier analysis of the second input image, and the fourier analysis after applying the 
+      laplacian filter. </p>
+        <p> Other images: </p>
+    <div class="row">
+      <img height="250px"src="static/cat.jpg"> </img>
+      <img height="250px"src="static/derek.jpg"> </img>
+      <img height="300px"src="static/hybrid_cat_derek.png"> </img>
+    </div>
+    <div class="row">
+      <img height="250px"src="static/egg.jpg"> </img>
+      <img height="250px"src="static/donald.jpg"> </img>
+      <img height="250px"src="static/hybrid_egg_donald.jpg"> </img>
+    </div>
+    <div class="row">
+      <img height="250px"src="static/rem.jpg"> </img>
+      <img height="250px"src="static/emilia.jpg"> </img>
+      <img height="250px"src="static/hybrid_rem_emilia.jpg"> </img>
+    </div>
+    <p> Noteably, the third group of images, the hybrid of rem and emilia (the two anime girls) do not work that well. 
+    The reason behind this is that the length of the face of rem annd emilia does not match that well, as a result, some discprency
+    can be found in the image.
+    </p>
+    <h3>
+      Gaussian & Laplacian Stacks
+    </h3>
+         <div class="row">
+      <img height="300px"src="static/stacks1/lincoln.jpg"> </img>
+      <img height="300px"src="static/stacks1/Gaussian0.jpg"> </img>
+      <img height="300px"src="static/stacks1/Gaussian1.jpg"> </img>
+      <img height="300px"src="static/stacks1/Gaussian2.jpg"> </img>
+      <img height="300px"src="static/stacks1/Gaussian3.jpg"> </img>
+      </div>
+      <div class="row">
+      <img height="300px"src="static/stacks1/lincoln.jpg"> </img>
+      <img height="300px"src="static/stacks1/Laplacian0.jpg"> </img>
+      <img height="300px"src="static/stacks1/Laplacian1.jpg"> </img>
+      <img height="300px"src="static/stacks1/Laplacian2.jpg"> </img>
+      <img height="300px"src="static/stacks1/Laplacian3.jpg"> </img>
+
+      </div>
+               <div class="row">
+     <img height="300px"src="static/trump_monkey/hybrid.jpg"> </img>
+      <img height="300px"src="static/stacks2/Gaussian0.jpg"> </img>
+      <img height="300px"src="static/stacks2/Gaussian1.jpg"> </img>
+      <img height="300px"src="static/stacks2/Gaussian2.jpg"> </img>
+      <img height="300px"src="static/stacks2/Gaussian3.jpg"> </img>
+      </div>
+      <div class="row">
+       <img height="300px"src="static/trump_monkey/hybrid.jpg"> </img>
+      <img height="300px"src="static/stacks2/Laplacian0.jpg"> </img>
+      <img height="300px"src="static/stacks2/Laplacian1.jpg"> </img>
+      <img height="300px"src="static/stacks2/Laplacian2.jpg"> </img>
+      <img height="300px"src="static/stacks2/Laplacian3.jpg"> </img>
+
+      </div>
+          <h3>
+      Multiresolution Blending
+    </h3>
+    <div class="row">
+      <img height="300px"src="static/apple.png"> </img>
+      <img height="300px"src="static/orange.png"> </img>
+      <img height="300px"src="static/orapple.png"> </img>
+    </div>
+    <div class="row">
+      <img height="300px"src="static/orange.png"> </img>
+      <img height="250px"src="static/eye.png"> </img>
+      <img height="300px"src="static/orangeye.png"> </img>
+    </div>
+    <div class="row">
+      <img height="300px"src="static/robert.png"> </img>
+      <img height="300px"src="static/iron.png"> </img>
+      <img height="300px"src="static/hybrid_robert_iron.png"> </img>
+    </div>
+    <p>
+    The third group of blending does not blend that well, due to the fact that iron man's mouse is a little bit below Robert's mouse.
+    </p>
+
+
+</body>
+</html>
